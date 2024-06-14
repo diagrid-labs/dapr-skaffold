@@ -1,0 +1,13 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.service</groupId>
+	<artifactId>Parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Parent</name>
+	<description>Dapr Skaffold Example</description>
+	<packaging>pom</packaging>
+	<modules>
+		<module>publisher</module>
+		<module>subscriber</module>
+	</modules>
+</project>

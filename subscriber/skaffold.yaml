@@ -1,0 +1,39 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: subscriber
+
+build:
+  tagPolicy:
+    inputDigest: { }
+  artifacts:
+    - image: bibryam/subscriber
+      docker:
+        dockerfile: Dockerfile
+  local: {}
+
+manifests:
+  rawYaml:
+    - ../common/kubernetes/*
+    - deploy/*
+
+deploy:
+  kubectl: {}
+  logs:
+    prefix: auto
+    jsonParse:
+      fields: ["time", "@timestamp", "level", "msg", "message"]
+
+portForward:
+  - resourceType: deployment
+    resourceName: subscriber
+    port: 5002
+    localPort: 5002
+  - resourceType: deployment
+    resourceName: subscriber
+    port: 9090
+    localPort: 5012
+  - resourceType: deployment
+    resourceName: subscriber
+    port: 3500
+    localPort: 3502

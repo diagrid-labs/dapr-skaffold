@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subscriber
+  labels:
+    app: subscriber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subscriber
+  template:
+    metadata:
+      annotations:
+        dapr.io/app-id: subscriber
+        dapr.io/enabled: "true"
+        dapr.io/app-port: "5002"
+        dapr.io/metrics-port: "9090"
+        dapr.io/log-as-json: "true"
+        dapr.io/log-level: "debug"
+        dapr.io/enable-api-logging: "true"
+#        dapr.io/enable-app-health-check: "true"
+#        dapr.io/app-health-check-path: "/actuator/health"
+      labels:
+        app: subscriber
+    spec:
+      containers:
+        - name: subscriber
+          image: bibryam/subscriber
+          ports:
+            - containerPort: 5002

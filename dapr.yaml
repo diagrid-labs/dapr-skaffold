@@ -1,0 +1,14 @@
+version: 1
+common:
+  resourcesPath: ./common/local
+  env:
+    DEBUG: true
+apps:
+  - appID: publisher
+    appDirPath: ./publisher
+    appPort: 5001
+    command: ["java", "-jar", "target/Publisher-0.0.1-SNAPSHOT.jar"]
+  - appID: subscriber
+    appDirPath: ./subscriber
+    appPort: 5002
+    command: ["java", "-jar", "target/Subscriber-0.0.1-SNAPSHOT.jar"]
